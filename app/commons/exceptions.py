@@ -177,8 +177,3 @@ class KeepErro(BaseException):
     http_code = httpcodes.HTTP_500_INTERNAL_SERVER_ERROR
     business_code = '300006'
     message = '保存现场失败'
-
-if __name__ == '__main__':
-    import inspect
-    for cls in BaseException.__subclasses__():
-        print(inspect.getmembers(cls))

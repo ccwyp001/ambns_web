@@ -27,11 +27,7 @@ def register_blueprints(app, v, package):
         if hasattr(module, 'bp'):
             bp = module.bp
             api = module.api
-            api.errors.update({
-                'NotImplemented': {'status': 300, 'message': 'dkhaksjdhsa', 'mess': 'dsasdas'},
-                'Exception': {'status': 300, 'message': 'dkhaksjdhsa', 'mess': 'dsasdas'},
-                'NoAuthorizationError':{'status':403, 'message':'Missing Authorization Header'}
-            })
+            api.errors.update(api_errors())
             api.representations['application/json'] = output_json
             app.register_blueprint(bp, url_prefix='/api/{0}/{1}'.format(v, bp.name))
 
@@ -48,3 +44,16 @@ def output_json(data, code, headers=None):
     response = make_response(json.dumps(result), code)
     response.headers.extend(headers or {})
     return response
+
+
+def api_errors():
+    errors = {
+        'NoAuthorizationError': {
+            'status': 403, 'message': 'Missing Authorization Header'}
+    }
+    from .commons.exceptions import BaseException
+    errors.update(
+        {cls.__name__: cls.__dict__ for cls in BaseException.__subclasses__()}
+    )
+
+    return errors
