@@ -20,6 +20,7 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
+    PROPAGATE_EXCEPTIONS = False
     # SQLALCHEMY SETTING
     # SQLALCHEMY_DATABASE_URI = 'sqlite:///' + \
     #     os.path.join(base_dir, 'dev.sqlite')

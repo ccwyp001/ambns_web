@@ -1,6 +1,6 @@
-from flask import Flask
+from flask import Flask, make_response
+import json
 from werkzeug.utils import find_modules, import_string
-
 from config import config
 from .extensions import db, jwt, ma, celery, SLBigInteger, LongText
 from . import models  # use for migrate
@@ -26,4 +26,25 @@ def register_blueprints(app, v, package):
         module = import_string(module_name)
         if hasattr(module, 'bp'):
             bp = module.bp
+            api = module.api
+            api.errors.update({
+                'NotImplemented': {'status': 300, 'message': 'dkhaksjdhsa', 'mess': 'dsasdas'},
+                'Exception': {'status': 300, 'message': 'dkhaksjdhsa', 'mess': 'dsasdas'},
+                'NoAuthorizationError':{'status':403, 'message':'Missing Authorization Header'}
+            })
+            api.representations['application/json'] = output_json
             app.register_blueprint(bp, url_prefix='/api/{0}/{1}'.format(v, bp.name))
+
+
+def output_json(data, code, headers=None):
+    result = {}
+    if code in (200, 201, 204):
+        result['code'] = 10000
+        result['data'] = data
+    else:
+        result['code'] = 44444
+        result['message'] = data['message']
+        result.update(data)
+    response = make_response(json.dumps(result), code)
+    response.headers.extend(headers or {})
+    return response
