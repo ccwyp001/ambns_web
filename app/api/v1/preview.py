@@ -14,10 +14,12 @@ api = Api(bp)
 @api.resource('/')
 class TestApi(Resource):
     def get(self):
-        # client = DispatchClient()
+        client = DispatchClient(timeout=10)
         # _ = client.member.on_duty()
-        # return _
+        _ = client.dispatch.ambulance_outed()
+        # _ = client.ambulance.ambulance_info()
+        return _
         # abort(300)
-        raise exceptions.AccountLoadError()
+        # raise exceptions.AccountLoadError()
         # abort(501)
-        return {'test':'hello world'}, 200
+        # return {'test':'hello world'}, 200

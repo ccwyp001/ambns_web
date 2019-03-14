@@ -107,14 +107,13 @@ class BaseDispatchClient(object):
         if not isinstance(result, dict):
             return result
 
-        if 'errcode' in result:
-            result['errcode'] = int(result['errcode'])
 
-        if 'errcode' in result and result['errcode'] != 0:
+        if 'errcode' in result and result['isSucceed'] != True:
             errcode = result['errcode']
-            errmsg = result.get('errmsg', errcode)
+            errmsg = result.get('msg', errcode)
+            raise Exception
 
-        return result if not result_processor else result_processor(result)
+        return result['resultData'] if not result_processor else result_processor(result)
 
     def get(self, url, **kwargs):
         return self._request(
