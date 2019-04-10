@@ -14,3 +14,19 @@ class DispatchMember(BaseDispatchApi):
                 'xzbm': xzbm
             }
         )
+
+    def org_info(self, xzbm=''):
+        return self._get(
+            'Get_All_V_ORG_INFO',
+            params={
+                'xzbm': xzbm
+            }
+        )
+
+    def mem_info(self):
+        return self._get(
+            'Get_V_MEMBER_INFO',
+            params={
+
+            }
+        )

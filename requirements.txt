@@ -47,6 +47,7 @@ python-dateutil==2.7.2
 python-docx==0.8.6
 python-editor==1.0.3
 pytz==2018.4
+requests>=2.18.1
 six==1.11.0
 SQLAlchemy==1.2.6
 sqlacodegen==2.0.0
