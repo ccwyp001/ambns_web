@@ -2,7 +2,7 @@ from flask import Flask, make_response
 import json
 from werkzeug.utils import find_modules, import_string
 from config import config
-from .extensions import db, jwt, ma, celery, SLBigInteger, LongText
+from .extensions import db, jwt, ma, celery, SLBigInteger, LongText, mc
 from . import models  # use for migrate
 
 
@@ -14,6 +14,7 @@ def create_app(config_name):
     jwt.init_app(app)
     db.init_app(app)
     ma.init_app(app)
+    mc.init_app(app)
     # celery.init_app(app)
 
     register_blueprints(app, 'v1', 'app.api.v1')

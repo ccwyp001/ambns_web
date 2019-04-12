@@ -1,16 +1,29 @@
 # -*- coding: utf-8 -*-
 import os
 import wechatpy
-from flask import Blueprint, jsonify, current_app
+from flask import Blueprint, jsonify, current_app, request
 from flask_restful import Api, Resource, HTTPException, abort
 from ...commons.ExtParser import DispatchClient
 from ...commons.wx_enterprise import WeiXin
+from ...commons.ProcedureAggregate import ProParser
 from flask_jwt_extended import jwt_required
 import json
+from ...commons.utils import md5_code
 from ...commons import exceptions
 
 bp = Blueprint('test', __name__)
 api = Api(bp)
+
+@api.resource('/login')
+class TestLoginApi(Resource):
+    def post(self):
+        request_dict = request.get_json()
+        username = request_dict['username']
+        password = request_dict['password']
+        pp = ProParser()
+        _ = pp.zit_mis_sys.check_user_info(username, md5_code(password))
+        return _
+
 
 
 @api.resource('/')

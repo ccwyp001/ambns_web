@@ -26,3 +26,4 @@ class AmbulManageApi(Resource):
     def post(self):
         pass
 
+

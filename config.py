@@ -20,8 +20,8 @@ class Config:
     # WECHAT SETTING
     WECHAT_BROKER_URL = 'redis://localhost:6379/1'
     WECHAT_SETTING = {
-        'default':{
-            'corp_id':'1'
+        'default': {
+            'corp_id': '1'
         },
         'address_book': {
             'secret': '1',
@@ -34,6 +34,18 @@ class Config:
             'agent_id': '1',
             'secret': '1'
         }
+    }
+
+    # ExtParser SETTING
+    EXT_PARSER_URL = '1'
+
+    # ProcedureAggregate SETTING
+    PROCEDURE_HOST = {
+        'ip': '1',
+        'port': '2',
+        'instance': '3',
+        'user': '4',
+        'pswd': '5',
     }
 
 
