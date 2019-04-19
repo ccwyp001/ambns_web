@@ -10,7 +10,7 @@ def create_app(config_name):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(config[config_name])
     app.config.from_pyfile('config.py', silent=True)
-
+    app.url_map.strict_slashes = False
     jwt.init_app(app)
     db.init_app(app)
     ma.init_app(app)
@@ -37,7 +37,7 @@ def output_json(data, code, headers=None):
     result = {}
     if code in (200, 201, 204):
         result['code'] = 10000
-        result['data'] = data
+        result['result'] = data
     else:
         result['code'] = 44444
         result['message'] = data['message']
@@ -50,7 +50,9 @@ def output_json(data, code, headers=None):
 def api_errors():
     errors = {
         'NoAuthorizationError': {
-            'status': 403, 'message': 'Missing Authorization Header'}
+            'status': 403, 'message': 'Missing Authorization Header'},
+        'ExpiredSignatureError': {
+            'status': 401, 'message': 'Signature has expired'}
     }
     from .commons.exceptions import BaseException
     errors.update(

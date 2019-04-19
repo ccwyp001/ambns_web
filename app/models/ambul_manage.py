@@ -13,7 +13,7 @@ class AmbulManage(db.Model):
     is_wear_work_cards = db.Column(db.Integer)
     is_take_medical_warehouse = db.Column(db.Integer)
 
-    note = db.Column(db.String)
+    note = db.Column(db.Text)
 
     __table_args__ = (
         db.UniqueConstraint('lsh',

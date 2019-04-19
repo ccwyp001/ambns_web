@@ -10,8 +10,11 @@ class Config:
     # JWT SETTING
     JWT_HEADER_NAME = 'Authorization'
     JWT_HEADER_TYPE = 'Ambulance'
+    JWT_ACCESS_TOKEN_EXPIRES = datetime.timedelta(minutes=1)
+    JWT_REFRESH_TOKEN_EXPIRES = datetime.timedelta(weeks=4)
     # RESTFUL SETTING
     ERROR_404_HELP = False
+    PROPAGATE_EXCEPTIONS = False
     # SQLALCHEMY SETTING
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -51,11 +54,10 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    PROPAGATE_EXCEPTIONS = False
-    # SQLALCHEMY SETTING
-    # SQLALCHEMY_DATABASE_URI = 'sqlite:///' + \
-    #     os.path.join(base_dir, 'dev.sqlite')
-
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+    SQLALCHEMY_POOL_SIZE = 100
+    SQLALCHEMY_POOL_RECYCLE = 120
+    SQLALCHEMY_POOL_TIMEOUT = 20
 
 class TestingConfig(Config):
     TESTING = True

@@ -14,16 +14,6 @@ from ...commons import exceptions
 bp = Blueprint('test', __name__)
 api = Api(bp)
 
-@api.resource('/login')
-class TestLoginApi(Resource):
-    def post(self):
-        request_dict = request.get_json()
-        username = request_dict['username']
-        password = request_dict['password']
-        pp = ProParser()
-        _ = pp.zit_mis_sys.check_user_info(username, md5_code(password))
-        return _
-
 
 
 @api.resource('/')
