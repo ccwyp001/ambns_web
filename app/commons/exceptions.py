@@ -29,43 +29,6 @@ class DataValidateError(BaseException):
     message = '数据验证错误'
 
 
-class JWTExpiredTokenError(BaseException):
-    http_code = httpcodes.HTTP_401_UNAUTHORIZED
-    business_code = '100002'
-    message = '鉴权信息过期'
-
-
-class JWTInvalidTokenError(BaseException):
-    http_code = httpcodes.HTTP_401_UNAUTHORIZED
-    business_code = '100003'
-    message = '鉴权信息格式错误'
-
-
-class JWTUnauthorizedError(BaseException):
-    http_code = httpcodes.HTTP_401_UNAUTHORIZED
-    business_code = '100004'
-    message = '鉴权信息缺失'
-
-
-class JWTRevokedTokenError(BaseException):
-    # token in black list
-    http_code = httpcodes.HTTP_401_UNAUTHORIZED
-    business_code = '100005'
-    message = '鉴权信息已撤销'
-
-
-class JWTNeedsFreshTokenError(BaseException):
-    http_code = httpcodes.HTTP_401_UNAUTHORIZED
-    business_code = '100006'
-    message = '刷新信息缺失'
-
-
-class JWTClaimsVerificationFailed(BaseException):
-    http_code = httpcodes.HTTP_400_BAD_REQUEST
-    business_code = '100007'
-    message = '声明信息验证失败'
-
-
 class Querying(BaseException):
     http_code = httpcodes.HTTP_200_OK
     business_code = '100100'
@@ -85,7 +48,7 @@ class AccountLoadError(BaseException):
 
 
 class AccountLoginFailed(BaseException):
-    http_code = httpcodes.HTTP_401_UNAUTHORIZED
+    status = httpcodes.HTTP_401_UNAUTHORIZED
     business_code = '101002'
     message = '账号或密码错误'
 

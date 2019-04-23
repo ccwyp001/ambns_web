@@ -25,7 +25,33 @@ class AmbulManage(db.Model):
         return '<AmbulManage %r>' % self.id
 
     def display(self):
-        return {}
+        return {'fileList': [_.display() for _ in self.pictures.all()],
+                'registered': True,
+                'desc': self.note,
+                'workwear': [str(_) for _ in [1,2,4] if _ & self.is_workwear] ,
+                'work_cards': [str(_) for _ in [1,2,4] if _ & self.is_wear_work_cards],
+                'medical_warehouse': [str(_) for _ in [1,2,4] if _ & self.is_take_medical_warehouse],
+                }
+
+    @classmethod
+    def from_data(cls, data):
+        lsh = data.get('lsh')
+        clid = data.get('clid')
+        workwear = data.get('workwear')
+        workwear = sum([int(_) for _ in workwear])
+        desc = data.get('desc')
+        work_cards = data.get('work_cards')
+        work_cards = sum([int(_) for _ in work_cards])
+        medical_warehouse = data.get('medical_warehouse')
+        medical_warehouse = sum([int(_) for _ in medical_warehouse])
+        return AmbulManage(
+            lsh=lsh,
+            clid=clid,
+            is_workwear=workwear,
+            is_wear_work_cards=work_cards,
+            is_take_medical_warehouse=medical_warehouse,
+            note=desc
+        )
 
 
 class AmbulManagePictures(db.Model):
@@ -34,7 +60,7 @@ class AmbulManagePictures(db.Model):
     ambul_manage_id = db.Column(
         SLBigInteger,
         db.ForeignKey('ambul_manage.id', ondelete='CASCADE'),
-        nullable=False)
+        nullable=True)
     ambul_manage = db.relationship(
         'AmbulManage',
         backref=db.backref('pictures', cascade="delete", lazy='dynamic'))
@@ -51,3 +77,13 @@ class AmbulManagePictures(db.Model):
                 'name': self.name,
                 'uid': self.id
                 }
+
+    @classmethod
+    def from_data(cls, data):
+        name = data.get('name')
+        thumb_text = data.get('thumbUrl')
+
+        return AmbulManagePictures(
+            name=name,
+            thumb_text=thumb_text
+        )

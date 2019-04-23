@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Flask, make_response
 import json
 from werkzeug.utils import find_modules, import_string
@@ -52,7 +53,7 @@ def api_errors():
         'NoAuthorizationError': {
             'status': 403, 'message': 'Missing Authorization Header'},
         'ExpiredSignatureError': {
-            'status': 401, 'message': 'Signature has expired'}
+            'status': 401, 'message': 'Signature has expired'},
     }
     from .commons.exceptions import BaseException
     errors.update(

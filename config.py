@@ -10,7 +10,7 @@ class Config:
     # JWT SETTING
     JWT_HEADER_NAME = 'Authorization'
     JWT_HEADER_TYPE = 'Ambulance'
-    JWT_ACCESS_TOKEN_EXPIRES = datetime.timedelta(minutes=1)
+    JWT_ACCESS_TOKEN_EXPIRES = datetime.timedelta(minutes=60)
     JWT_REFRESH_TOKEN_EXPIRES = datetime.timedelta(weeks=4)
     # RESTFUL SETTING
     ERROR_404_HELP = False
@@ -50,6 +50,8 @@ class Config:
         'user': '4',
         'pswd': '5',
     }
+
+    UPLOAD_FOLDER = os.path.join(base_dir, 'app', 'static', 'uploads')
 
 
 class DevelopmentConfig(Config):
