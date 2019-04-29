@@ -159,6 +159,6 @@ class AmbulManagePicApi(Resource):
         save_name = str(uuid.uuid4()) + '.' + file.filename.split('.')[-1]
         save_path = os.path.join(current_app.config['UPLOAD_FOLDER'], save_name)
         file.save(save_path)
-        if os.path.getsize(save_path) > 1024 * 1024:
+        if os.path.getsize(save_path) > 10 * 1024 * 1024:
             abort(415)
         return {'id':'1'}
