@@ -11,3 +11,12 @@ class DispatchAmbulance(BaseDispatchApi):
                 'xzbm': xzbm
             }
         )
+
+    def ambulance_info_by_lsh_clid(self, lsh='', clid=''):
+        return self._get(
+            'GET_CCXX_CLXQ_INFO_BY_LSH_CLID',
+            params={
+                'lsh': lsh,
+                'clid': clid,
+            }
+        )
