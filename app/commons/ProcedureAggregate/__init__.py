@@ -10,6 +10,7 @@ class ProParser(BaseProParser):
 
     zit_mis_sys = api.ZIT_MIS_SYS_PKG()
     zit_statistics = api.ZIT_MIS_STATISTICS_PKG()
+    zit_mis_medical = api.ZIT_MIS_MEDICAL_PKG()
 
     def __init__(self, timeout=None):
         super(ProParser, self).__init__(
