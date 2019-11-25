@@ -30,7 +30,7 @@ gunicorn==19.9.0
 idna==2.6
 inflect==2.1.0
 itsdangerous==1.1.0
-Jinja2==2.10
+Jinja2>=2.10.1
 kiwisolver==1.0.1
 kombu==4.1.0
 lxml==4.2.1
