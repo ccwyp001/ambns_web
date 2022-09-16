@@ -34,7 +34,7 @@ Jinja2>=2.10.1
 kiwisolver==1.0.1
 kombu==4.1.0
 lxml==4.2.1
-Mako==1.0.7
+Mako==1.2.2
 mammoth==1.4.5
 MarkupSafe==1.0
 marshmallow==2.15.4
